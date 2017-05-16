@@ -11,8 +11,16 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Response;
+
 public class MainActivity extends AppCompatActivity {
     ArrayList<City> mCities;
+
+    public static final String TAG = MainActivity.class.getSimpleName();
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,6 +35,8 @@ public class MainActivity extends AppCompatActivity {
         for (int i = 0; i < mCities.size();i++){
             Log.d(mCities.get(i).getCityName(),mCities.get(i).getCountry());
         }
+
+        getCities();
     }
 
 
@@ -49,49 +59,28 @@ public class MainActivity extends AppCompatActivity {
             try { is.close(); } catch (Throwable ignore) {}
         }
 
-
-
-
-
-
-
-
-
-
-//
-//        //sets text file name to a variable
-//        String fileName = "cities.txt";
-//
-//        //will contain one line at a time
-//        String line = null;
-//
-//        //Could I in principle put this all in a different method
-//        try{
-//            // reads file in default encoding
-//            FileReader fileReader = new FileReader(fileName);
-//
-//            //Wrap filereader in BufferedReader
-//            BufferedReader bufferedReader = new BufferedReader(fileReader);
-//
-//            //Read through every line
-//            while((line= bufferedReader.readLine())!=null){
-//                //Create a city object for every line
-//                allCities.add(new City(line));
-//            }
-//
-//            bufferedReader.close();
-//
-//
-//        }catch(FileNotFoundException ex) {
-//            Log.d("Error","Unable to open file" + fileName);
-//            ex.printStackTrace();
-//        }
-//        catch(IOException ex) {
-//            System.out.println(
-//                    "Error reading file '"
-//                            + fileName + "'");
-//        }
-
         return allCities;
+    }
+
+
+    private void getCities(){
+        final TwitterService twitterService = new TwitterService();
+        twitterService.findCityImages(new Callback() {
+
+            @Override
+            public void onFailure(Call call, IOException e) {
+                e.printStackTrace();
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                try {
+                    String jsonData = response.body().string();
+                    Log.v(TAG, jsonData);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 }
