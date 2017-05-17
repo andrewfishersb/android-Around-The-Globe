@@ -73,9 +73,9 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void getCity(City currentCity){
-        final TwitterService twitterService = new TwitterService();
+        final FlickrService flickrService = new FlickrService();
 
-        twitterService.findCityImages(currentCity, new Callback() {
+        flickrService.findCityImages(currentCity, new Callback() {
 
             @Override
             public void onFailure(Call call, IOException e) {

@@ -20,10 +20,6 @@ public class Constants {
     public static final String FLICKR_PRIVACY_FILTER_QUERY_PARAMETER = "privacy_filter";
     public static final String FLICKR_PRIVACY_SCOPE = "1"; //public only
 
-    //SAFE SEARCH
-    public static final String FLICKR_SAFE_SEARCH_QUERY_PARAMETER = "safe_search";
-    public static final String FLICKR_SAFE_SEARCH_ON = "1"; //Safe Search on
-
     //LOCATION BASE QUERIES
     public static final String FLICKR_LATITUDE_QUERY_PARAMETER = "lat";
     public static final String FLICKR_LONGITUDE_QUERY_PARAMETER = "lon";
@@ -46,8 +42,14 @@ public class Constants {
     public static final String FLICKR_MEDIA_TYPE = "photos";
     public static final String FLICKR_CONTENT_TYPE_QUERY = "content_type";
     public static final String FLICKR_CONTENT_TYPE = "4"; //4 (for photos and screenshots.) OR 1 (for photos only.)
-    public static final String FLICKR_GEO_CONTEXT_QUERY = "geo_context";
-    public static final String FLICKR_GEO_CONTEXT = "2";//0 = default, 1 = indoor, 2 = outdoor
+
+    //PARTS OF URL TO CREATE IMAGE URL
+    //https://farm{farm-id}.staticflickr.com/{server-id}/{id}_{secret}.jpg
+    public static final String FLICKR_IMAGE_BASE_URL = "https://farm";
+    public static final String FLICKR_IMAGE_URL_DOT_COM = ".staticflickr.com";
+    public static final String FLICKR_IMAGE_URL_FILE_FORMAT = ".jpg";
+
+
 
 
 }
