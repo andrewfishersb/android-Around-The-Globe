@@ -5,6 +5,10 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -32,11 +36,16 @@ public class MainActivity extends AppCompatActivity {
            Log.d("Error","File not found");
         }
 
+        int indexOfNY = 0;
         for (int i = 0; i < mCities.size();i++){
             Log.d(mCities.get(i).getCityName(),mCities.get(i).getCountry());
+            if(mCities.get(i).getCityName().equalsIgnoreCase("New York")){
+                indexOfNY=i;
+            }
         }
 
-        getCities();
+
+        getCity(mCities.get(indexOfNY));
     }
 
 
@@ -46,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
 
         AssetManager am = this.getAssets();
 
-        InputStream is = am.open("cities.txt");
+        InputStream is = am.open("allcities.txt");
         String line;
         try {
             BufferedReader reader = new BufferedReader(new InputStreamReader(is));
@@ -63,9 +72,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private void getCities(){
+    private void getCity(City currentCity){
         final TwitterService twitterService = new TwitterService();
-        twitterService.findCityImages(new Callback() {
+
+        twitterService.findCityImages(currentCity, new Callback() {
 
             @Override
             public void onFailure(Call call, IOException e) {
@@ -76,7 +86,21 @@ public class MainActivity extends AppCompatActivity {
             public void onResponse(Call call, Response response) throws IOException {
                 try {
                     String jsonData = response.body().string();
-                    Log.v(TAG, jsonData);
+
+                    try{
+                        JSONObject jobj = new JSONObject(jsonData);
+
+                        JSONArray ar = jobj.getJSONArray("statuses");
+                        int  arLen = ar.length();
+                        Log.d("statuses size",arLen+"");
+
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+
+//                    Log.v(TAG, jsonData);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

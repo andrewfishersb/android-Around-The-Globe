@@ -17,7 +17,7 @@ public class TwitterService {
 
 
     //maybe feed in longitude and latitude
-    public static void findCityImages(Callback callback){
+    public static void findCityImages(City city, Callback callback){
 
         OkHttpOAuthConsumer consumer = new OkHttpOAuthConsumer(Constants.TWITTER_CONSUMER_KEY,Constants.TWITTER_CONSUMER_SECRET);
 
@@ -25,8 +25,21 @@ public class TwitterService {
 
         OkHttpClient client = new OkHttpClient.Builder().addInterceptor(new SigningInterceptor(consumer)).build();
 
+        //Create Geocode string (lat,long,radius)
+        StringBuilder geocodeStringBuilder = new StringBuilder();
+        geocodeStringBuilder.append(city.getLatitude())
+                .append(",")
+                .append(city.getLongitude())
+                .append(",")
+                .append(Constants.TWITTER_RADIUS_QUERY_PARAMETER);
+
+
+
         HttpUrl.Builder urlBuilder = HttpUrl.parse(Constants.TWITTER_BASE_URL).newBuilder();
-        urlBuilder.addQueryParameter(Constants.TWITTER_GEOCODE_QUERY_PARAMETER,"45.511102,-122.689507,10mi");
+        urlBuilder
+                .addQueryParameter(Constants.TWITTER_GEOCODE_QUERY_PARAMETER,geocodeStringBuilder.toString())
+                .addQueryParameter(Constants.TWITTER_FILTER_QUERY_PARAMETER,Constants.TWITTER_FILTER_TYPE_QUERY_PARAMETER);
+//                .addQueryParameter(Constants.TWITTER_COUNT_QUERY_PARAMETER,Constants.TWITTER_MAX_COUNT_QUERY_PARAMETER);
         String url = urlBuilder.build().toString();
 
         Request request = new Request.Builder().url(url).build();

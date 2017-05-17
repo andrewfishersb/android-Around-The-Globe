@@ -1,24 +1,53 @@
 package com.fisher.andrew.aroundtheglobe;
 
-/**
- * Created by andrewfisher on 5/16/17.
- */
+
 
 public class Constants {
 
-    //TOKENS and ACCESS KEYS
-    public static final String TWITTER_CONSUMER_KEY = BuildConfig.TWITTER_CONSUMER_KEY;
-    public static final String TWITTER_CONSUMER_SECRET = BuildConfig.TWITTER_CONSUMER_SECRET;
-    public static final String TWITTER_TOKEN = BuildConfig.TWITTER_TOKEN;
-    public static final String TWITTER_TOKEN_SECRET = BuildConfig.TWITTER_TOKEN_SECRET;
+    //API Key
+    public static final String FLICKR_API_KEY_RECEIVER = "api_key";
+    public static final String FLICKR_API_KEY = BuildConfig.FLICKR_API_KEY;
+
+    //BASE URL
+    public static final String FLICKR_BASE_URL = "https://api.flickr.com/services/rest/?";
 
 
-    //API Call Constants
-    public static final String TWITTER_BASE_URL = "https://api.twitter.com/1.1/search/tweets.json?";//maybe needs the q=
-    public static final String TWITTER_GEOCODE_QUERY_PARAMETER = "geocode";
-    public static final String TWITTER_RADIUS_QUERY_PARAMETER = "10mi";
-    public static final String TWITTER_COUNT_QUERY_PARAMETER = "count";
-    public static final String TWITTER_FILTER_QUERY_PARAMETER = "filter";
+    //METHOD
+    public static final String FLICKR_METHOD_QUERY_PARAMETER = "method";
+    public static final String FLICKR_SEARCH_METHOD_QUERY_PARAMETER = "flickr.photos.search";
+
+    //PRIVACY
+    public static final String FLICKR_PRIVACY_FILTER_QUERY_PARAMETER = "privacy_filter";
+    public static final String FLICKR_PRIVACY_SCOPE = "1"; //public only
+
+    //SAFE SEARCH
+    public static final String FLICKR_SAFE_SEARCH_QUERY_PARAMETER = "safe_search";
+    public static final String FLICKR_SAFE_SEARCH_ON = "1"; //Safe Search on
+
+    //LOCATION BASE QUERIES
+    public static final String FLICKR_LATITUDE_QUERY_PARAMETER = "lat";
+    public static final String FLICKR_LONGITUDE_QUERY_PARAMETER = "lon";
+    public static final String FLICKR_DISTANCE_QUERY_PARAMETER = "accuracy";
+    public static final String FLICKR_DISTANCE_TYPE = "11";
+
+
+    //FORMAT
+    public static final String FLICKR_FORMAT_PARAMETER = "format";
+    public static final String FLICKR_FORMAT_TYPE = "json";
+
+    //RETURN INFORMATION
+    public static final String FLICKR_PER_PAGE_QUERY = "per_page";
+    public static final String FLICKR_IMAGES_PER_PAGE = "50";//CHANGE TO 10 OR SOMETHING????
+    public static final String FLICKR_PAGE_QUERY = "page";
+    public static final String FLICKR_NUMBER_OF_PAGES = "1";
+
+    //TYPE OF PHOTOS
+    public static final String FLICKR_MEDIA_TYPE_QUERY = "media";
+    public static final String FLICKR_MEDIA_TYPE = "photos";
+    public static final String FLICKR_CONTENT_TYPE_QUERY = "content_type";
+    public static final String FLICKR_CONTENT_TYPE = "4"; //4 (for photos and screenshots.) OR 1 (for photos only.)
+    public static final String FLICKR_GEO_CONTEXT_QUERY = "geo_context";
+    public static final String FLICKR_GEO_CONTEXT = "2";//0 = default, 1 = indoor, 2 = outdoor
 
 
 }
