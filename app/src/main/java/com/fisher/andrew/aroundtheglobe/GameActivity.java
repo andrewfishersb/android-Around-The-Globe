@@ -1,33 +1,33 @@
 package com.fisher.andrew.aroundtheglobe;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.fisher.andrew.aroundtheglobe.models.City;
+import com.fisher.andrew.aroundtheglobe.models.Photo;
+import com.squareup.picasso.Picasso;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.Response;
 
-public class GameActivity extends AppCompatActivity {
+public class GameActivity extends AppCompatActivity implements View.OnClickListener{
     @Bind(R.id.city_image) ImageView mCityImage;
     @Bind(R.id.answer_a) Button mAnswerA;
     @Bind(R.id.answer_b) Button mAnswerB;
     @Bind(R.id.answer_c) Button mAnswerC;
     @Bind(R.id.answer_d) Button mAnswerD;
-    City mCity;
+
+    String correctAnswer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,64 +37,84 @@ public class GameActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         ArrayList<City> cities = this.getIntent().getParcelableArrayListExtra("initial_cities");
 
-        //wrong answer array
-        int[] wrongAnswerIndexes = new int[3];
+        Intent intent = getIntent();
 
-        mCity = cities.get(39);
-        getCity(mCity);
+        int[] wrongAnswerIndexes = intent.getIntArrayExtra("wrong_answers");
+        City correctCity = intent.getParcelableExtra("correct_city");
 
 
-        mAnswerA.setText(cities.get(39).getCityName()+", "+cities.get(39).getCountry());
-        mAnswerB.setText(cities.get(28).getCityName()+", "+cities.get(28).getCountry());
-        mAnswerC.setText(cities.get(16).getCityName()+", "+cities.get(16).getCountry());
-        mAnswerD.setText(cities.get(48).getCityName()+", "+cities.get(48).getCountry());
 
+        Photo correctPhoto = intent.getParcelableExtra("pic");
+
+
+        //Attaches correct image
+        Picasso.with(this).load(correctPhoto.getPhotoUrl()).into(mCityImage);
+
+
+        correctAnswer = correctCity.getCityName()+", " + correctCity.getCountry();
+        //Set button text
+        //ArrayList of buttons meant to randomize where each answer goes
+        List<Button> randomizeAnswers = Arrays.asList(mAnswerA,mAnswerB,mAnswerC,mAnswerD);
+        Collections.shuffle(randomizeAnswers);
+
+        //attaches answers to the button
+        randomizeAnswers.get(0).setText(correctAnswer);//correct answer
+        randomizeAnswers.get(1).setText(cities.get(wrongAnswerIndexes[0]).getCityName()+", "+cities.get(wrongAnswerIndexes[0]).getCountry());
+        randomizeAnswers.get(2).setText(cities.get(wrongAnswerIndexes[1]).getCityName()+", "+cities.get(wrongAnswerIndexes[1]).getCountry());
+        randomizeAnswers.get(3).setText(cities.get(wrongAnswerIndexes[2]).getCityName()+", "+cities.get(wrongAnswerIndexes[2]).getCountry());
+
+
+        //Set Click Listeners
+        mAnswerA.setOnClickListener(this);
+        mAnswerB.setOnClickListener(this);
+        mAnswerC.setOnClickListener(this);
+        mAnswerD.setOnClickListener(this);
     }
 
 
-    private void getCity(final City currentCity){
-        final FlickrService flickrService = new FlickrService();
+    @Override
+    public void onClick(View view) {
 
-        flickrService.findCityImages(currentCity, new Callback() {
 
-            @Override
-            public void onFailure(Call call, IOException e) {
-                e.printStackTrace();
+        if(view == mAnswerA){
+            if(checkAnswer(mAnswerA.getText().toString(),correctAnswer)){
+                Toast.makeText(this, "Correct", Toast.LENGTH_SHORT).show();
+            }else{
+                Toast.makeText(this, "Answer was: " +correctAnswer, Toast.LENGTH_SHORT).show();
             }
+        }
 
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                try {
-                    String jsonData = response.body().string();
-
-                    try{
-//                        Log.d("JSON",jsonData);
-
-                        JSONObject jobj = new JSONObject(jsonData);
-                        JSONObject jsonPhotos = jobj.getJSONObject("photos");
-                        JSONArray photoArray = jsonPhotos.getJSONArray("photo");
-
-                        //testing with first image
-                        JSONObject pa = (JSONObject) photoArray.get(28);
-                        String id = pa.getString("id");
-                        String secret = pa.getString("secret");
-                        String server = pa.getString("server");
-                        int farm = pa.getInt("farm");
-
-                        mCity.setPhoto(farm,server,id,secret);
-                        Log.d("URL",mCity.createPhotoUrl());
-
-
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-
-
-//                    Log.v(TAG, jsonData);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+        if(view == mAnswerB){
+            if(checkAnswer(mAnswerB.getText().toString(),correctAnswer)){
+                Toast.makeText(this, "Correct", Toast.LENGTH_SHORT).show();
+            }else{
+                Toast.makeText(this, "Answer was:" +correctAnswer, Toast.LENGTH_SHORT).show();
             }
-        });
+        }
+
+        if(view == mAnswerC){
+            if(checkAnswer(mAnswerC.getText().toString(),correctAnswer)){
+                Toast.makeText(this, "Correct", Toast.LENGTH_SHORT).show();
+            }else{
+                Toast.makeText(this, "Answer was:" +correctAnswer, Toast.LENGTH_SHORT).show();
+            }
+        }
+
+        if(view == mAnswerD){
+            if(checkAnswer(mAnswerD.getText().toString(),correctAnswer)){
+                Toast.makeText(this, "Correct", Toast.LENGTH_SHORT).show();
+            }else{
+                Toast.makeText(this, "Answer was:" +correctAnswer, Toast.LENGTH_SHORT).show();
+            }
+        }
+
+    }
+
+    private boolean checkAnswer(String guess, String answer){
+        if(guess.equals(answer)){
+            return true;
+        }else{
+            return false;
+        }
     }
 }

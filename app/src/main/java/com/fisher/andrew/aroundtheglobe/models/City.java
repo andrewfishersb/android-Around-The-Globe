@@ -112,9 +112,9 @@ public class City implements Parcelable{
         this.continent = continent;
     }
 
-    public String createPhotoUrl(){
+    public String getPhotoUrl(){
         //optimize later to properly create the url maybe with okhttp methods
-        photoUrl = "https://farm" + mPhoto.getFarm() +".staticflickr.com/"+mPhoto.getServer()+"/"+mPhoto.getId()+"_"+mPhoto.getSecretId() +".jpg";
+        photoUrl = "https://farm" + mPhoto.getFarm() +".staticflickr.com/"+mPhoto.getServer()+"/"+mPhoto.getPhotoId()+"_"+mPhoto.getSecretId() +".jpg";
 //can try again with constants from url
 
         return photoUrl;
