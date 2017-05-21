@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Button mLaunchGame;
     int generateCorrectIndex;
 
-    City correctCity;
+    City correctCity=null;
 
     public static final String TAG = MainActivity.class.getSimpleName();
 
