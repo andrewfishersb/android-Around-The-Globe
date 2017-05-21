@@ -1,0 +1,50 @@
+45.52002382,-122.6799901,1207757,Portland,United States of America,Oregon,North America
+21.30687644,-157.8579979,578829,Honolulu,United States of America,Hawaii,North America
+37.74000775,-122.4599777,2091036,San Francisco,United States of America,California,North America
+29.99500246,-90.03996688,527429,New Orleans,United States of America,Louisiana,North America
+40.74997906,-73.98001693,13524139,New York,United States of America,New York,North America
+42.32996014,-71.07001367,2528071,Boston,United States of America,Massachusetts,North America
+34.43498985,-119.7199899,135021,Santa Barbara,United States of America,California,North America
+43.69997988,-79.42002079,4573711,Toronto,Canada,Ontario,North America
+49.27341658,-123.1216442,1458415,Vancouver,Canada,British Columbia,North America
+36.20999778,-115.2200061,1150717,Las Vegas,United States of America,Nevada,North America
+19.44244244,-99.1309882,14919501,Mexico City,Mexico,Distrito Federal,Central America
+9.93501243,-84.08405135,642862,San Jose,Costa Rica,San José,Central America
+8.96801719,-79.53303715,844584,Panama City,Panama,Panama,Central America
+13.71000165,-89.20304122,717904,San Salvador,El Salvador,San Salvador,Central America
+14.62113466,-90.52696558,1009469,Guatemala City,Guatemala,Guatemala,Central America
+17.97707662,-76.76743371,801337,Kingston,Jamaica,Kingston,North America
+23.13195884,-82.36418217,2082459,Havana,Cuba,Ciudad de la Habana,North America
+18.47007285,-69.90008508,1078437,Santo Domingo,Dominican Republic,Distrito Nacional,North America
+18.5410246,-72.33603459,1616371,Port-au-Prince,Haiti,Ouest,North America
+26.53327578,-78.70001306,25383,Freeport,The Bahamas,,North America
+-33.92001097,151.1851798,4135711,Sydney,Australia,New South Wales,Oceania
+-36.850013,174.7649808,759510,Auckland,New Zealand,Auckland,Oceania
+-18.13301593,178.4417073,131835,Suva,Fiji,Central,Oceania
+-9.437994295,159.9497657,66313,Honiara,Solomon Islands,Guadalcanal,Oceania
+-37.82003131,144.9750162,2131813,Melbourne,Australia,Victoria,Oceania
+-34.60250161,-58.39753137,11862073,Buenos Aires,Argentina,Ciudad de Buenos Aires,South America
+-22.92502317,-43.22502079,6879088,Rio de Janeiro,Brazil,Rio de Janeiro,South America
+4.596423563,-74.08334396,7052831,Bogota,Colombia,Bogota,South America
+-12.04801268,-77.05006209,7385117,Lima,Peru,Lima,South America
+-33.45001382,-70.66704085,2883306,Santiago,Chile,Región Metropolitana de Santiago,South America
+6.443261653,3.391531071,4733768,Lagos,Nigeria,Lagos,Africa
+-33.92001097,18.43498816,2823929,Cape Town,South Africa,Western Cape,Africa
+2.066681334,45.36667761,987694,Mogadishu,Somalia,Banaadir,Africa
+30.04996035,31.24996822,9813807,Cairo,Egypt,Al Qahirah,Africa
+33.59997622,-7.616367433,3162955,Casablanca,Morocco,Grand Casablanca,Africa
+52.34996869,4.916640176,886318,Amsterdam,Netherlands,Noord-Holland,Europe
+51.22037355,3.230024779,131589,Brugge,Belgium,Brugge,Europe
+55.67856419,12.56348575,1085000,Kobenhavn,Denmark,Hovedstaden,Europe
+42.66094769,18.09139156,32711,Dubrovnik,Croatia,Dubrovacko-Neretvanska,Europe
+67.8500045,20.21663651,13302,Kiruna,Sweden,Norrbotten,Europe
+51.49999473,-0.116721844,7994105,London,United Kingdom,Westminster,Europe
+59.91669029,10.74997921,707500,Oslo,Norway,Oslo,Europe
+48.86669293,2.333335326,4957589,Paris,France,Île-de-France,Europe
+41.89595563,12.48325842,1687226,Rome,Italy,Lazio,Europe
+45.43865928,12.33499874,270816,Venice,Italy,Veneto,Europe
+35.68501691,139.7514074,22006300,Tokyo,Japan,Tokyo,Asia
+31.21645245,121.4365047,14797756,Shanghai,China,Shanghai,Asia
+-6.174417705,106.8294376,8832561,Jakarta,Indonesia,Jakarta Raya,Asia
+37.5663491,126.999731,9796000,Seoul,South Korea,Seoul,Asia
+25.22999615,55.27997432,1258174,Dubai,United Arab Emirates,Dubay,Asia

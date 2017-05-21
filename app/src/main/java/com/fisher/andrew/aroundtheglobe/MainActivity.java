@@ -1,13 +1,14 @@
 package com.fisher.andrew.aroundtheglobe;
 
+import android.content.Intent;
 import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.fisher.andrew.aroundtheglobe.models.City;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -15,12 +16,10 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.Response;
-
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener{
     ArrayList<City> mCities;
+    Button mLaunchGame;
+
 
     public static final String TAG = MainActivity.class.getSimpleName();
 
@@ -31,31 +30,39 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         try{
-            mCities = extractCities();
+            mCities = loadCitiesFromFile();
         }catch (IOException e){
            Log.d("Error","File not found");
         }
 
-        int indexOfNY = 0;
-        for (int i = 0; i < mCities.size();i++){
-            Log.d(mCities.get(i).getCityName(),mCities.get(i).getCountry());
-            if(mCities.get(i).getCityName().equalsIgnoreCase("New York")){
-                indexOfNY=i;
-            }
-        }
 
+//        for(int i = 400; i< mCities.size()
+//                ;i++) {
+//
+//            // mCities.size()
+//
+////            if(i>=){
+////                break;
+////            }
+//
+//            getCity(mCities.get(i));
+//            Log.d("Index",i+"");
+//
+//        }
 
-        getCity(mCities.get(indexOfNY));
+        mLaunchGame = (Button) findViewById(R.id.launch_game);
+        mLaunchGame.setOnClickListener(this);
+
     }
 
 
 
-    private ArrayList<City> extractCities() throws IOException {
+    private ArrayList<City> loadCitiesFromFile() throws IOException {
         ArrayList<City> allCities = new ArrayList<>();
 
         AssetManager am = this.getAssets();
 
-        InputStream is = am.open("allcities.txt");
+        InputStream is = am.open("testcities.txt");
         String line;
         try {
             BufferedReader reader = new BufferedReader(new InputStreamReader(is));
@@ -72,39 +79,19 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private void getCity(City currentCity){
-        final FlickrService flickrService = new FlickrService();
-
-        flickrService.findCityImages(currentCity, new Callback() {
-
-            @Override
-            public void onFailure(Call call, IOException e) {
-                e.printStackTrace();
-            }
-
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                try {
-                    String jsonData = response.body().string();
-
-                    try{
-                        JSONObject jobj = new JSONObject(jsonData);
-
-                        JSONArray ar = jobj.getJSONArray("statuses");
-                        int  arLen = ar.length();
-                        Log.d("statuses size",arLen+"");
 
 
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
+    @Override
+    public void onClick(View view) {
+
+        Intent intent = new Intent(this, GameActivity.class);
+        intent.putParcelableArrayListExtra("initial_cities",mCities);
 
 
-//                    Log.v(TAG, jsonData);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
+
+//        intent.putExtra("cities",mCities);
+
+
+        startActivity(intent);
     }
 }

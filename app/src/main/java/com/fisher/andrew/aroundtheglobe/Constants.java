@@ -30,6 +30,8 @@ public class Constants {
     //FORMAT
     public static final String FLICKR_FORMAT_PARAMETER = "format";
     public static final String FLICKR_FORMAT_TYPE = "json";
+    public static final String FLICKR_RETURN_JSON_QUERY = "nojsoncallback";
+    public static final String FLICKR_RETURN_JSON_TYPE = "1";
 
     //RETURN INFORMATION
     public static final String FLICKR_PER_PAGE_QUERY = "per_page";
@@ -42,6 +44,11 @@ public class Constants {
     public static final String FLICKR_MEDIA_TYPE = "photos";
     public static final String FLICKR_CONTENT_TYPE_QUERY = "content_type";
     public static final String FLICKR_CONTENT_TYPE = "4"; //4 (for photos and screenshots.) OR 1 (for photos only.)
+
+    //SORT PHOTOS - MAY NOT USE IF I DONT LIKE THE RESULTS AS MUCH AS THE DEAFAULT
+    public static final String FLICKR_SORT_TYPE_QUERY = "sort";
+    public static final String FLICK_SORT_POPULAR = "interestingness-desc";
+
 
     //PARTS OF URL TO CREATE IMAGE URL
     //https://farm{farm-id}.staticflickr.com/{server-id}/{id}_{secret}.jpg

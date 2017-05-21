@@ -1,8 +1,12 @@
 package com.fisher.andrew.aroundtheglobe;
 
 
+import com.fisher.andrew.aroundtheglobe.models.City;
+
+import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.HttpUrl;
+import okhttp3.OkHttpClient;
 import okhttp3.Request;
 
 /**
@@ -19,15 +23,8 @@ public class FlickrService {
 ////
 //        consumer.setTokenWithSecret(Constants.TWITTER_TOKEN,Constants.TWITTER_TOKEN_SECRET);
 ////
-//        OkHttpClient client = new OkHttpClient.Builder().addInterceptor(new SigningInterceptor(consumer)).build();
+        OkHttpClient client = new OkHttpClient();
 
-        //Create Geocode string (lat,long,radius)
-//        StringBuilder geocodeStringBuilder = new StringBuilder();
-//        geocodeStringBuilder.append(city.getLatitude())
-//                .append(",")
-//                .append(city.getLongitude())
-//                .append(",")
-//                .append(Constants.TWITTER_RADIUS_QUERY_PARAMETER);
 
 
         HttpUrl.Builder urlBuilder = HttpUrl.parse(Constants.FLICKR_BASE_URL).newBuilder();
@@ -42,7 +39,9 @@ public class FlickrService {
                 .addQueryParameter(Constants.FLICKR_PER_PAGE_QUERY,Constants.FLICKR_IMAGES_PER_PAGE)
                 .addQueryParameter(Constants.FLICKR_PAGE_QUERY,Constants.FLICKR_NUMBER_OF_PAGES)
                 .addQueryParameter(Constants.FLICKR_MEDIA_TYPE_QUERY,Constants.FLICKR_MEDIA_TYPE)
-                .addQueryParameter(Constants.FLICKR_CONTENT_TYPE_QUERY,Constants.FLICKR_CONTENT_TYPE);
+                .addQueryParameter(Constants.FLICKR_CONTENT_TYPE_QUERY,Constants.FLICKR_CONTENT_TYPE)
+                .addQueryParameter(Constants.FLICKR_SORT_TYPE_QUERY, Constants.FLICK_SORT_POPULAR)
+                .addQueryParameter(Constants.FLICKR_RETURN_JSON_QUERY,Constants.FLICKR_RETURN_JSON_TYPE);
 
 
 
@@ -53,8 +52,8 @@ public class FlickrService {
 
         Request request = new Request.Builder().url(url).build();
 
-//        Call call = client.newCall(request);
-//        call.enqueue(callback);
+        Call call = client.newCall(request);
+        call.enqueue(callback);
 
     }
 
