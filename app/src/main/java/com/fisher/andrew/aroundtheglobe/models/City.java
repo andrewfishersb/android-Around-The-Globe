@@ -27,6 +27,7 @@ public class City implements Parcelable{
     }
 
     protected City(Parcel in) {
+        mPhoto = in.readParcelable(Photo.class.getClassLoader());
         latitude = in.readDouble();
         longitude = in.readDouble();
         population = in.readInt();
@@ -128,6 +129,7 @@ public class City implements Parcelable{
 
     @Override
     public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeParcelable(mPhoto,i);
         parcel.writeDouble(latitude);
         parcel.writeDouble(longitude);
         parcel.writeInt(population);

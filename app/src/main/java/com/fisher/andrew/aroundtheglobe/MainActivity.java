@@ -113,7 +113,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         intent.putExtra("wrong_answers",wrongIndexes);
         intent.putExtra("correct_city",correctCity);
 
-
+        //pass correct photo to page - have to do as parcelable wont work
         Photo correctPhoto = correctCity.getPhoto();
         intent.putExtra("pic",correctPhoto);
         intent.putExtra("cities",mCities);

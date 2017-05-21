@@ -3,6 +3,7 @@ package com.fisher.andrew.aroundtheglobe;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -42,13 +43,13 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         int[] wrongAnswerIndexes = intent.getIntArrayExtra("wrong_answers");
         City correctCity = intent.getParcelableExtra("correct_city");
 
-
+        Log.d("City lahskfhskjdfhdksj",correctCity.getPhotoUrl());
 
         Photo correctPhoto = intent.getParcelableExtra("pic");
 
 
         //Attaches correct image
-        Picasso.with(this).load(correctPhoto.getPhotoUrl()).into(mCityImage);
+        Picasso.with(this).load(correctCity.getPhotoUrl()).into(mCityImage);
 
 
         correctAnswer = correctCity.getCityName()+", " + correctCity.getCountry();
