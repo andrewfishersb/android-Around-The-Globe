@@ -3,6 +3,9 @@ package com.fisher.andrew.aroundtheglobe.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class City implements Parcelable{
     private double latitude;
     private double longitude;
@@ -11,8 +14,7 @@ public class City implements Parcelable{
     private String country;
     private String region;
     private String continent;
-    private String photoUrl;
-    private Photo mPhoto;
+    private ArrayList<Photo> mPhotos;
 
 
     public City(String lineFromFile){
@@ -24,10 +26,14 @@ public class City implements Parcelable{
         country = splitCityInformation[4];
         region = splitCityInformation[5];
         continent = splitCityInformation[6];
+        mPhotos = new ArrayList<>();
     }
 
     protected City(Parcel in) {
-        mPhoto = in.readParcelable(Photo.class.getClassLoader());
+        //may need to check this line of code now that i am trying to use an array list
+        //in.readParcelableArray()???
+//        mPhotos = in.readParcelable(Photo.class.getClassLoader());
+        mPhotos = in.createTypedArrayList(Photo.CREATOR);
         latitude = in.readDouble();
         longitude = in.readDouble();
         population = in.readInt();
@@ -49,12 +55,12 @@ public class City implements Parcelable{
         }
     };
 
-    public Photo getPhoto(){
-        return mPhoto;
+    public List<Photo> getPhotos(){
+        return mPhotos;
     }
 
-    public void setPhoto(int farm, String server, String id, String secret ){
-        mPhoto = new Photo(farm,server,id,secret);
+    public void addPhoto(Photo photo){
+        mPhotos.add(photo);
     }
 
     public double getLatitude() {
@@ -113,14 +119,6 @@ public class City implements Parcelable{
         this.continent = continent;
     }
 
-    public String getPhotoUrl(){
-        //optimize later to properly create the url maybe with okhttp methods
-        photoUrl = "https://farm" + mPhoto.getFarm() +".staticflickr.com/"+mPhoto.getServer()+"/"+mPhoto.getPhotoId()+"_"+mPhoto.getSecretId() +".jpg";
-//can try again with constants from url
-
-        return photoUrl;
-    }
-
 
     @Override
     public int describeContents() {
@@ -129,7 +127,9 @@ public class City implements Parcelable{
 
     @Override
     public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeParcelable(mPhoto,i);
+
+//        parcel.writeParcelable((Parcelable) mPhotos,i);
+        parcel.writeTypedList(mPhotos);
         parcel.writeDouble(latitude);
         parcel.writeDouble(longitude);
         parcel.writeInt(population);

@@ -2,7 +2,10 @@ package com.fisher.andrew.aroundtheglobe.models;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.util.Log;
+
+import com.fisher.andrew.aroundtheglobe.Constants;
+
+import okhttp3.HttpUrl;
 
 /**
  * Created by andrewfisher on 5/20/17.
@@ -76,9 +79,20 @@ public class Photo implements Parcelable {
     }
 
     public String getPhotoUrl(){
-        String url = "https://farm" + farm +".staticflickr.com/"+server+"/"+photoId+"_"+secretId +".jpg";
 
-        Log.d("Url in Photo class", url);
+        //Base Url: https://farm" + farm +".staticflickr.com
+        String baseUrl = Constants.FLICKR_IMAGE_BASE_URL + farm + Constants.FLICKR_IMAGE_URL_DOT_COM;
+
+        // Last Path: photoId+"_"+secretId.jpg";
+        String lastPath = photoId + "_" + secretId + Constants.FLICKR_IMAGE_URL_FILE_FORMAT;
+
+        //Builds base url
+        HttpUrl.Builder urlBuilder = HttpUrl.parse(baseUrl).newBuilder();
+
+        //adds two paths onto the url adding necessities to display the correct image
+        urlBuilder.addPathSegment(server).addPathSegment(lastPath);
+
+       String url = urlBuilder.build().toString();
 
         return url;
     }

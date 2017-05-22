@@ -9,9 +9,6 @@ import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 
-/**
- * Created by andrewfisher on 5/16/17.
- */
 
 public class FlickrService {
 

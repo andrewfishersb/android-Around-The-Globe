@@ -114,8 +114,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         intent.putExtra("correct_city",correctCity);
 
         //pass correct photo to page - have to do as parcelable wont work
-        Photo correctPhoto = correctCity.getPhoto();
-        intent.putExtra("pic",correctPhoto);
         intent.putExtra("cities",mCities);
 
 
@@ -144,15 +142,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         JSONObject jsonPhotos = jobj.getJSONObject("photos");
                         JSONArray photoArray = jsonPhotos.getJSONArray("photo");
 
-                        //testing with first image
-                        JSONObject pa = (JSONObject) photoArray.get(28);
-                        String id = pa.getString("id");
-                        String secret = pa.getString("secret");
-                        String server = pa.getString("server");
-                        int farm = pa.getInt("farm");
+                        for(int i = 0; i < photoArray.length();i++){
+                            JSONObject curJsonPhoto = photoArray.getJSONObject(i);
 
-                        currentCity.setPhoto(farm,server,id,secret);
-                        Log.d("URL",currentCity.getPhotoUrl());
+
+                            String id = curJsonPhoto.getString("id");
+                            String secret = curJsonPhoto.getString("secret");
+                            String server = curJsonPhoto.getString("server");
+                            int farm = curJsonPhoto.getInt("farm");
+
+                            Photo curPhoto = new Photo(farm,server,id,secret);
+                            currentCity.addPhoto(curPhoto);
+                        }
 
 
                     } catch (JSONException e) {

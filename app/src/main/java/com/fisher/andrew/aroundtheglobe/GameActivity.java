@@ -3,7 +3,6 @@ package com.fisher.andrew.aroundtheglobe;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -43,13 +42,9 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         int[] wrongAnswerIndexes = intent.getIntArrayExtra("wrong_answers");
         City correctCity = intent.getParcelableExtra("correct_city");
 
-        Log.d("City lahskfhskjdfhdksj",correctCity.getPhotoUrl());
-
-        Photo correctPhoto = intent.getParcelableExtra("pic");
-
-
         //Attaches correct image
-        Picasso.with(this).load(correctCity.getPhotoUrl()).into(mCityImage);
+        List<Photo> correctPhotos =  correctCity.getPhotos();
+        Picasso.with(this).load(correctPhotos.get(4).getPhotoUrl()).into(mCityImage);
 
 
         correctAnswer = correctCity.getCityName()+", " + correctCity.getCountry();
@@ -89,7 +84,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
             if(checkAnswer(mAnswerB.getText().toString(),correctAnswer)){
                 Toast.makeText(this, "Correct", Toast.LENGTH_SHORT).show();
             }else{
-                Toast.makeText(this, "Answer was:" +correctAnswer, Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Answer was: " +correctAnswer, Toast.LENGTH_SHORT).show();
             }
         }
 
@@ -97,7 +92,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
             if(checkAnswer(mAnswerC.getText().toString(),correctAnswer)){
                 Toast.makeText(this, "Correct", Toast.LENGTH_SHORT).show();
             }else{
-                Toast.makeText(this, "Answer was:" +correctAnswer, Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Answer was: " +correctAnswer, Toast.LENGTH_SHORT).show();
             }
         }
 
@@ -105,7 +100,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
             if(checkAnswer(mAnswerD.getText().toString(),correctAnswer)){
                 Toast.makeText(this, "Correct", Toast.LENGTH_SHORT).show();
             }else{
-                Toast.makeText(this, "Answer was:" +correctAnswer, Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Answer was: " +correctAnswer, Toast.LENGTH_SHORT).show();
             }
         }
 
