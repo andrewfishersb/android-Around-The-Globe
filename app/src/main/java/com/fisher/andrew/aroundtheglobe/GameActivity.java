@@ -2,15 +2,14 @@ package com.fisher.andrew.aroundtheglobe;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.fisher.andrew.aroundtheglobe.models.City;
-import com.fisher.andrew.aroundtheglobe.models.Photo;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -21,13 +20,16 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 public class GameActivity extends AppCompatActivity implements View.OnClickListener{
-    @Bind(R.id.city_image) ImageView mCityImage;
+//    @Bind(R.id.city_image) ImageView mCityImage;
     @Bind(R.id.answer_a) Button mAnswerA;
     @Bind(R.id.answer_b) Button mAnswerB;
     @Bind(R.id.answer_c) Button mAnswerC;
     @Bind(R.id.answer_d) Button mAnswerD;
 
     String correctAnswer;
+
+
+    FragmentPagerAdapter adapterViewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,8 +45,8 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         City correctCity = intent.getParcelableExtra("correct_city");
 
         //Attaches correct image
-        List<Photo> correctPhotos =  correctCity.getPhotos();
-        Picasso.with(this).load(correctPhotos.get(4).getPhotoUrl()).into(mCityImage);
+//        List<Photo> correctPhotos =  correctCity.getPhotos();
+//        Picasso.with(this).load(correctPhotos.get(4).getPhotoUrl()).into(mCityImage);
 
 
         correctAnswer = correctCity.getCityName()+", " + correctCity.getCountry();
@@ -68,12 +70,11 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
 
 
 
-
-
-
         //messing around
-        ImageFragment imFrg = (ImageFragment) getSupportFragmentManager().findFragmentById(R.id.city_image_fragment);
-
+        ViewPager viewPager;
+        viewPager = (ViewPager) findViewById(R.id.city_view_pager);
+        adapterViewPager = new ImagePagerAdapter(getSupportFragmentManager(),correctCity);
+        viewPager.setAdapter(adapterViewPager);
 
     }
 

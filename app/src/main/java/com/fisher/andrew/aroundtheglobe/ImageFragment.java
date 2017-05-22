@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.fisher.andrew.aroundtheglobe.models.City;
+import com.fisher.andrew.aroundtheglobe.models.Photo;
 import com.squareup.picasso.Picasso;
 
 /**
@@ -16,18 +16,18 @@ import com.squareup.picasso.Picasso;
  */
 public class ImageFragment extends Fragment {
     private int page;
-    private City mCity;
+    private Photo mPhoto;
 
     public ImageFragment() {
         // Required empty public constructor
     }
 
-    public static ImageFragment newInstance(int page, City city){
+    public static ImageFragment newInstance(int page, Photo photo){
         ImageFragment fragmentImage = new ImageFragment();
         Bundle args = new Bundle();
 
         args.putInt("page",page);
-        fragmentImage.mCity = city;
+        fragmentImage.mPhoto = photo;
         fragmentImage.setArguments(args);
         return fragmentImage;
     }
@@ -43,17 +43,10 @@ public class ImageFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view =  inflater.inflate(R.layout.fragment_image, container, false);
+        View view =  inflater.inflate(R.layout.fragment_image_slide_page, container, false);
 
         ImageView img = (ImageView) view.findViewById(R.id.city_image_view);
-
-
-switch (page){
-    case 0:
-        Picasso.with(getContext()).load(mCity.getPhotos().get(0).getPhotoUrl()).into(img);
-
-}
-
+        Picasso.with(getContext()).load(mPhoto.getPhotoUrl()).into(img);
 
 
         return view;
