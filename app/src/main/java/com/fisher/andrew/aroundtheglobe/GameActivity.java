@@ -65,6 +65,16 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         mAnswerB.setOnClickListener(this);
         mAnswerC.setOnClickListener(this);
         mAnswerD.setOnClickListener(this);
+
+
+
+
+
+
+        //messing around
+        ImageFragment imFrg = (ImageFragment) getSupportFragmentManager().findFragmentById(R.id.city_image_fragment);
+
+
     }
 
 
