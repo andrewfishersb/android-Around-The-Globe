@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -44,17 +45,15 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         int[] wrongAnswerIndexes = intent.getIntArrayExtra("wrong_answers");
         City correctCity = intent.getParcelableExtra("correct_city");
 
-        //Attaches correct image
-//        List<Photo> correctPhotos =  correctCity.getPhotos();
-//        Picasso.with(this).load(correctPhotos.get(4).getPhotoUrl()).into(mCityImage);
-
 
         correctAnswer = correctCity.getCityName()+", " + correctCity.getCountry();
-        //Set button text
+
         //ArrayList of buttons meant to randomize where each answer goes
         List<Button> randomizeAnswers = Arrays.asList(mAnswerA,mAnswerB,mAnswerC,mAnswerD);
         Collections.shuffle(randomizeAnswers);
 
+
+        Log.d("Url",correctCity.getPhotos().get(0).getPhotoUrl());
         //attaches answers to the button
         randomizeAnswers.get(0).setText(correctAnswer);//correct answer
         randomizeAnswers.get(1).setText(cities.get(wrongAnswerIndexes[0]).getCityName()+", "+cities.get(wrongAnswerIndexes[0]).getCountry());

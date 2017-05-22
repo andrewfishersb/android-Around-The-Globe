@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Button mLaunchGame;
     int generateCorrectIndex;
 
-    City correctCity=null;
+    City correctCity = null;
 
     public static final String TAG = MainActivity.class.getSimpleName();
 
@@ -47,11 +47,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
            Log.d("Error","File not found");
         }
 
+
+
         Random rnd = new Random();
-
-        int generateCorrectIndex = rnd.nextInt(mCities.size());
-
-
+        generateCorrectIndex = rnd.nextInt(mCities.size());
         correctCity= mCities.get(generateCorrectIndex);
         getCity(correctCity);
 
