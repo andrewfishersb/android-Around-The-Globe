@@ -16,6 +16,7 @@ public class GameScreenPagerAdapter extends FragmentPagerAdapter{
 
     public GameScreenPagerAdapter(FragmentManager fragmentManager){
         super(fragmentManager);
+
     }
 
     @Override

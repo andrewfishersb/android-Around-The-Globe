@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
+import com.fisher.andrew.aroundtheglobe.Adapters.GameScreenPagerAdapter;
 import com.fisher.andrew.aroundtheglobe.R;
 import com.fisher.andrew.aroundtheglobe.Services.FlickrService;
 import com.fisher.andrew.aroundtheglobe.Utils.NonSwipeableViewPager;
@@ -16,6 +17,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -26,7 +28,9 @@ import okhttp3.Response;
 public class GameActivity extends AppCompatActivity implements View.OnClickListener{
 //    @Bind(R.id.city_image) ImageView mCityImage;
     @Bind(R.id.gamePager)
-    NonSwipeableViewPager mNonSwipeableViewPager;
+    NonSwipeableViewPager mPager;
+    private List<City> mCities;
+    private GameScreenPagerAdapter mAdapter;
 
 //    @Bind(R.id.answer_a) Button mAnswerABtn;
 //    @Bind(R.id.answer_b) Button mAnswerBBtn;
@@ -47,6 +51,15 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
 
 
         Intent intent = getIntent();
+
+        mCities = intent.getParcelableArrayListExtra("initial_cities");
+
+
+
+
+
+
+
 
 
 
@@ -82,6 +95,16 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
 //        adapterViewPager = new ImagePagerAdapter(getSupportFragmentManager(),correctCity);
 //        viewPager.setAdapter(adapterViewPager);
 
+
+
+        //Game screen pager
+        mAdapter = new GameScreenPagerAdapter(getSupportFragmentManager());
+        mPager.setAdapter(mAdapter);
+
+    }
+
+    public NonSwipeableViewPager getPager(){
+        return mPager;
     }
 
 //nothing for now
