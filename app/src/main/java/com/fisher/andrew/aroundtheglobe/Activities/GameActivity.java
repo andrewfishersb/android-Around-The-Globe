@@ -68,7 +68,6 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         mAnswerDBtn.setOnClickListener(this);
 
 
-
         //messing around
         ViewPager viewPager;
         viewPager = (ViewPager) findViewById(R.id.city_view_pager);

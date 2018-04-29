@@ -6,6 +6,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <com.fisher.andrew.aroundtheglobe.Utils.NonSwipeableViewPager
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="wrap_content"
@@ -77,6 +80,8 @@
             android:textAllCaps="false"
             android:textColor="#fff"
             android:textSize="18sp"/>
+
+
     </LinearLayout>
 
 </RelativeLayout>
