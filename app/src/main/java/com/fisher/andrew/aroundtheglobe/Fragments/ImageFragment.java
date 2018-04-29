@@ -1,4 +1,4 @@
-package com.fisher.andrew.aroundtheglobe;
+package com.fisher.andrew.aroundtheglobe.Fragments;
 
 
 import android.os.Bundle;
@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.fisher.andrew.aroundtheglobe.R;
 import com.fisher.andrew.aroundtheglobe.models.Photo;
 import com.squareup.picasso.Picasso;
 

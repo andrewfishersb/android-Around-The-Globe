@@ -1,6 +1,7 @@
-package com.fisher.andrew.aroundtheglobe;
+package com.fisher.andrew.aroundtheglobe.Services;
 
 
+import com.fisher.andrew.aroundtheglobe.Utils.Constants;
 import com.fisher.andrew.aroundtheglobe.models.City;
 
 import okhttp3.Call;
@@ -39,6 +40,7 @@ public class FlickrService {
         Request request = new Request.Builder().url(url).build();
 
         Call call = client.newCall(request);
+
         call.enqueue(callback);
 
     }

@@ -1,9 +1,10 @@
-package com.fisher.andrew.aroundtheglobe;
+package com.fisher.andrew.aroundtheglobe.Adapters;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
+import com.fisher.andrew.aroundtheglobe.Fragments.ImageFragment;
 import com.fisher.andrew.aroundtheglobe.models.City;
 import com.fisher.andrew.aroundtheglobe.models.Photo;
 

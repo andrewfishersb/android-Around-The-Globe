@@ -3,7 +3,7 @@ package com.fisher.andrew.aroundtheglobe.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.fisher.andrew.aroundtheglobe.Constants;
+import com.fisher.andrew.aroundtheglobe.Utils.Constants;
 
 import okhttp3.HttpUrl;
 

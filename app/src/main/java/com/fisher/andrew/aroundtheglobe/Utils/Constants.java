@@ -1,6 +1,7 @@
-package com.fisher.andrew.aroundtheglobe;
+package com.fisher.andrew.aroundtheglobe.Utils;
 
 
+import com.fisher.andrew.aroundtheglobe.BuildConfig;
 
 public class Constants {
 
