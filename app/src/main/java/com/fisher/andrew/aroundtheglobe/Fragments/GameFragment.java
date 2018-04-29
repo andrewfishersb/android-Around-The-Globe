@@ -15,8 +15,9 @@ import com.fisher.andrew.aroundtheglobe.R;
 public class GameFragment extends Fragment {
 
 
-    public GameFragment() {
+    public static GameFragment newInstance() {
         // Required empty public constructor
+        return new GameFragment();
     }
 
 
