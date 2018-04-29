@@ -17,7 +17,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -56,11 +58,25 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
 
 
 
+        Random rnd = new Random();
+        //eventually make sure none of the same indexes // maybe a secondary method that checks
+        int slide1 = rnd.nextInt(mCities.size());
+        int slide2 = rnd.nextInt(mCities.size());
+        int slide3= rnd.nextInt(mCities.size());
+
+        City city1= mCities.get(slide1);
+        City city2= mCities.get(slide2);
+        City city3= mCities.get(slide3);
+
+        getCity(city1);
+        getCity(city2);
+        getCity(city3);
 
 
-
-
-
+ArrayList<City> answers = new ArrayList<>();
+answers.add(city1);
+        answers.add(city2);
+        answers.add(city3);
 
 
 //        ArrayList<City> cities = this.getIntent().getParcelableArrayListExtra("initial_cities");
@@ -98,13 +114,17 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
 
 
         //Game screen pager
-        mAdapter = new GameScreenPagerAdapter(getSupportFragmentManager());
+        mAdapter = new GameScreenPagerAdapter(getSupportFragmentManager(),answers);
         mPager.setAdapter(mAdapter);
 
     }
 
     public NonSwipeableViewPager getPager(){
         return mPager;
+    }
+
+    public List<City> getCities(){
+        return mCities;
     }
 
 //nothing for now

@@ -34,7 +34,7 @@ public class ImageFragment extends Fragment {
     }
 
     // Store instance variables based on arguments passed
-    @Override
+    @Override//todo why this method?
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         page = getArguments().getInt("page",0);

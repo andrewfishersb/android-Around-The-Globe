@@ -15,7 +15,7 @@ public class City implements Parcelable{
     private String region;
     private String continent;
     private ArrayList<Photo> mPhotos;
-
+//todo maybe add an ID
 
     public City(String lineFromFile){
         String[] splitCityInformation = lineFromFile.split(",");
