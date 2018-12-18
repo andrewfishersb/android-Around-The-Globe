@@ -16,10 +16,16 @@
         android:src="@drawable/sand"/>
 
 
-    <com.fisher.andrew.aroundtheglobe.Utils.NonSwipeableViewPager
-        android:id="@+id/gamePager"
+    <FrameLayout
         android:layout_width="match_parent"
+        android:id="@+id/gameScreen"
         android:layout_height="match_parent"/>
+
+
+    <!--<com.fisher.andrew.aroundtheglobe.Utils.NonSwipeableViewPager-->
+        <!--android:id="@+id/gamePager"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"/>-->
 
 
     <!--<LinearLayout-->

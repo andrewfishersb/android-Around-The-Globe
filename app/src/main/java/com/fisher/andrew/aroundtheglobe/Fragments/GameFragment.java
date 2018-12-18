@@ -13,6 +13,7 @@ import android.widget.Button;
 
 import com.fisher.andrew.aroundtheglobe.Activities.GameActivity;
 import com.fisher.andrew.aroundtheglobe.Adapters.ImagePagerAdapter;
+import com.fisher.andrew.aroundtheglobe.FlickrAsyncTask;
 import com.fisher.andrew.aroundtheglobe.R;
 import com.fisher.andrew.aroundtheglobe.models.City;
 
@@ -20,6 +21,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.ExecutionException;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -36,8 +38,8 @@ public class GameFragment extends Fragment implements View.OnClickListener{
     Button mAnswerCBtn;
     @Bind(R.id.answer_d)
     Button mAnswerDBtn;
-    @Bind(R.id.city_view_pager)
-    ViewPager mCityImagePager;
+//    @Bind(R.id.city_view_pager)
+//    ViewPager mCityImagePager;
 
     private GameActivity mActivity;
     private List<Button> mBtnAnswerArray;
@@ -63,6 +65,13 @@ public class GameFragment extends Fragment implements View.OnClickListener{
         ButterKnife.bind(this,v);
 
         City correctCity = getArguments().getParcelable("city");
+        try {
+            new FlickrAsyncTask().execute(correctCity).get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
 
         mActivity = (GameActivity) getActivity();
         String[] wrongAnswers = wrongCityAnswers();
@@ -89,6 +98,7 @@ public class GameFragment extends Fragment implements View.OnClickListener{
                 ViewPager imgPager = (ViewPager) v.findViewById(R.id.city_view_pager);
                 ImagePagerAdapter adapter = new ImagePagerAdapter(getFragmentManager(),correctCity.getPhotos());
         imgPager.setAdapter(adapter);
+
 
         return v;
     }
@@ -124,8 +134,13 @@ public class GameFragment extends Fragment implements View.OnClickListener{
 
         }
 
-        int incrementPagerIndex = mActivity.getPager().getCurrentItem() + 1;
-        mActivity.getPager().setCurrentItem(incrementPagerIndex);
+        mActivity.incrementCurrentRound();
+        int nextRoundIndex = mActivity.getCurrentRound();
+        Log.d("IndexCheck",""+nextRoundIndex);
+        mActivity.goToNextRound(nextRoundIndex);
+
+//        int incrementPagerIndex = mActivity.getPager().getCurrentItem() + 1;
+//        mActivity.getPager().setCurrentItem(incrementPagerIndex);
 
     }
 

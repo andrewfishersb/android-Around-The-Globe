@@ -2,13 +2,15 @@ package com.fisher.andrew.aroundtheglobe.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.FrameLayout;
 
 import com.fisher.andrew.aroundtheglobe.Adapters.GameScreenPagerAdapter;
+import com.fisher.andrew.aroundtheglobe.Fragments.GameFragment;
 import com.fisher.andrew.aroundtheglobe.R;
-import com.fisher.andrew.aroundtheglobe.Utils.NonSwipeableViewPager;
 import com.fisher.andrew.aroundtheglobe.models.City;
 
 import java.util.ArrayList;
@@ -21,10 +23,14 @@ import butterknife.ButterKnife;
 public class GameActivity extends AppCompatActivity implements View.OnClickListener{
 //    @Bind(R.id.city_image_view)
 //    ImageView mCityImage;
-    @Bind(R.id.gamePager)
-    NonSwipeableViewPager mPager;
+//    @Bind(R.id.gamePager)
+//    NonSwipeableViewPager mPager;
+    @Bind(R.id.gameScreen)
+    FrameLayout mScreen;
     private List<City> mCities;
     private GameScreenPagerAdapter mAdapter;
+    private int mRound;
+    private int mTotalRounds;
 
 //    @Bind(R.id.answer_a) Button mAnswerABtn;
 //    @Bind(R.id.answer_b) Button mAnswerBBtn;
@@ -47,7 +53,8 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         Intent intent = getIntent();
 
         mCities = intent.getParcelableArrayListExtra("initial_cities");
-
+mRound = 0;
+mTotalRounds = 0;
 
         Random rnd = new Random();
         //eventually make sure none of the same indexes // maybe a secondary method that checks
@@ -70,6 +77,21 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         answers.add(city1);
         answers.add(city2);
         answers.add(city3);
+
+
+        FragmentManager fm = getSupportFragmentManager();
+        GameFragment gFrag = GameFragment.newInstance(city1);
+        fm.beginTransaction().replace(R.id.gameScreen,gFrag).commit();
+
+
+
+
+
+
+
+
+
+
 
 
 //        ArrayList<City> cities = this.getIntent().getParcelableArrayListExtra("initial_cities");
@@ -110,18 +132,44 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
 
 
         //Game screen pager
-        mAdapter = new GameScreenPagerAdapter(getSupportFragmentManager(),answers);
-        mPager.setAdapter(mAdapter);
+//        mAdapter = new GameScreenPagerAdapter(getSupportFragmentManager(),answers);
+//        mPager.setAdapter(mAdapter);
 
     }
 
-    public NonSwipeableViewPager getPager(){
-        return mPager;
-    }
 
     public List<City> getCities(){
         return mCities;
     }
+
+    public void setNumberOfRounds(int rounds){
+         mTotalRounds = rounds;
+    }
+
+    public int getNumberOfRounds(){
+        return mTotalRounds;
+    }
+
+    public void incrementCurrentRound(){
+        mRound++;
+    }
+
+    public int getCurrentRound(){
+        return mRound;
+    }
+
+    public void goToNextRound(int round){
+        FragmentManager fm = getSupportFragmentManager();
+        City nextCity = mCities.get(round);
+        GameFragment gFrag = GameFragment.newInstance(nextCity);
+        fm.beginTransaction().replace(R.id.gameScreen,gFrag).commit();
+    }
+
+
+//    public NonSwipeableViewPager getPager(){
+//        return mPager;
+//    }
+
 
 //nothing for now
     @Override
