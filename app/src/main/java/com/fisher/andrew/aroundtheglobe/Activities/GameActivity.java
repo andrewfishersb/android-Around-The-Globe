@@ -3,32 +3,24 @@ package com.fisher.andrew.aroundtheglobe.Activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 
 import com.fisher.andrew.aroundtheglobe.Adapters.GameScreenPagerAdapter;
 import com.fisher.andrew.aroundtheglobe.R;
-import com.fisher.andrew.aroundtheglobe.Services.FlickrService;
 import com.fisher.andrew.aroundtheglobe.Utils.NonSwipeableViewPager;
 import com.fisher.andrew.aroundtheglobe.models.City;
-import com.fisher.andrew.aroundtheglobe.models.Photo;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.Response;
 
 public class GameActivity extends AppCompatActivity implements View.OnClickListener{
-//    @Bind(R.id.city_image) ImageView mCityImage;
+//    @Bind(R.id.city_image_view)
+//    ImageView mCityImage;
     @Bind(R.id.gamePager)
     NonSwipeableViewPager mPager;
     private List<City> mCities;
@@ -57,7 +49,6 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         mCities = intent.getParcelableArrayListExtra("initial_cities");
 
 
-
         Random rnd = new Random();
         //eventually make sure none of the same indexes // maybe a secondary method that checks
         int slide1 = rnd.nextInt(mCities.size());
@@ -68,13 +59,15 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         City city2= mCities.get(slide2);
         City city3= mCities.get(slide3);
 
-        getCity(city1);
-        getCity(city2);
-        getCity(city3);
+        //us async instead
+//        new RetrieveCityAnswerTasks().execute(city1);
+//        getCity(city1);
+//        getCity(city2);
+//        getCity(city3);
 
-
-ArrayList<City> answers = new ArrayList<>();
-answers.add(city1);
+        Log.d("PhotoSize", "Size: " + city1.getPhotos().size());
+        ArrayList<City> answers = new ArrayList<>();
+        answers.add(city1);
         answers.add(city2);
         answers.add(city3);
 
@@ -112,6 +105,9 @@ answers.add(city1);
 //        viewPager.setAdapter(adapterViewPager);
 
 
+//        GameFragment.newInstance(mCities.get(0));
+//        Log.d("CityCheck",mCities.get(0).getCityName() + " Size " + mCities.size());
+
 
         //Game screen pager
         mAdapter = new GameScreenPagerAdapter(getSupportFragmentManager(),answers);
@@ -130,6 +126,11 @@ answers.add(city1);
 //nothing for now
     @Override
     public void onClick(View view) {
+
+
+
+
+
 
 
 
@@ -175,56 +176,5 @@ answers.add(city1);
 
     }
 
-//    private boolean checkAnswer(String guess, String answer){
-//        return guess.equals(answer);
-//    }
-
-
-    private void getCity(final City currentCity){
-        final FlickrService flickrService = new FlickrService();
-
-        flickrService.findCityImages(currentCity, new Callback() {
-
-            @Override
-            public void onFailure(Call call, IOException e) {
-                e.printStackTrace();
-            }
-
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                try {
-                    String jsonData = response.body().string();
-
-                    try{
-
-                        JSONObject jobj = new JSONObject(jsonData);
-                        JSONObject jsonPhotos = jobj.getJSONObject("photos");
-                        JSONArray photoArray = jsonPhotos.getJSONArray("photo");
-
-                        for(int i = 0; i < photoArray.length();i++){
-                            JSONObject curJsonPhoto = photoArray.getJSONObject(i);
-
-
-                            String id = curJsonPhoto.getString("id");
-                            String secret = curJsonPhoto.getString("secret");
-                            String server = curJsonPhoto.getString("server");
-                            int farm = curJsonPhoto.getInt("farm");
-
-                            Photo curPhoto = new Photo(farm,server,id,secret);
-                            currentCity.addPhoto(curPhoto);
-                        }
-
-
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-
-
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
 
 }

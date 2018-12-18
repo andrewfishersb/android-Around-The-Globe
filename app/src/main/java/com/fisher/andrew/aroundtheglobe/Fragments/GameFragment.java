@@ -3,12 +3,16 @@ package com.fisher.andrew.aroundtheglobe.Fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.fisher.andrew.aroundtheglobe.Activities.GameActivity;
+import com.fisher.andrew.aroundtheglobe.Adapters.ImagePagerAdapter;
 import com.fisher.andrew.aroundtheglobe.R;
 import com.fisher.andrew.aroundtheglobe.models.City;
 
@@ -32,6 +36,9 @@ public class GameFragment extends Fragment implements View.OnClickListener{
     Button mAnswerCBtn;
     @Bind(R.id.answer_d)
     Button mAnswerDBtn;
+    @Bind(R.id.city_view_pager)
+    ViewPager mCityImagePager;
+
     private GameActivity mActivity;
     private List<Button> mBtnAnswerArray;
 
@@ -56,6 +63,7 @@ public class GameFragment extends Fragment implements View.OnClickListener{
         ButterKnife.bind(this,v);
 
         City correctCity = getArguments().getParcelable("city");
+
         mActivity = (GameActivity) getActivity();
         String[] wrongAnswers = wrongCityAnswers();
 
@@ -69,8 +77,18 @@ public class GameFragment extends Fragment implements View.OnClickListener{
         mBtnAnswerArray.get(3).setText(wrongAnswers[2]);
 
 
+        mBtnAnswerArray.get(0).setOnClickListener(this);
+        mBtnAnswerArray.get(1).setOnClickListener(this);
+        mBtnAnswerArray.get(2).setOnClickListener(this);
+        mBtnAnswerArray.get(3).setOnClickListener(this);
 
 
+        Log.d("Check","City Photos " + correctCity.getCityName() + " " + correctCity.getPhotos().size()+"");
+
+//todo commented out to help debug
+                ViewPager imgPager = (ViewPager) v.findViewById(R.id.city_view_pager);
+                ImagePagerAdapter adapter = new ImagePagerAdapter(getFragmentManager(),correctCity.getPhotos());
+        imgPager.setAdapter(adapter);
 
         return v;
     }
@@ -98,5 +116,17 @@ public class GameFragment extends Fragment implements View.OnClickListener{
     @Override
     public void onClick(View view) {
 
+        if(view == mBtnAnswerArray.get(0)){
+            mBtnAnswerArray.get(0).setBackgroundDrawable(ContextCompat.getDrawable(getContext(),R.drawable.answer_btn_correct));
+        }else{
+            mBtnAnswerArray.get(0).setBackgroundDrawable(ContextCompat.getDrawable(getContext(),R.drawable.answer_btn_correct));
+            view.setBackgroundDrawable(ContextCompat.getDrawable(getContext(),R.drawable.answer_btn_wrong));
+
+        }
+
+        int incrementPagerIndex = mActivity.getPager().getCurrentItem() + 1;
+        mActivity.getPager().setCurrentItem(incrementPagerIndex);
+
     }
+
 }

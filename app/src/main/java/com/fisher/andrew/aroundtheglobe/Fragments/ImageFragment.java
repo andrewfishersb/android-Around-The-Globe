@@ -24,6 +24,7 @@ public class ImageFragment extends Fragment {
     }
 
     public static ImageFragment newInstance(int page, Photo photo){
+
         ImageFragment fragmentImage = new ImageFragment();
         Bundle args = new Bundle();
 
@@ -37,6 +38,7 @@ public class ImageFragment extends Fragment {
     @Override//todo why this method?
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         page = getArguments().getInt("page",0);
     }
 
@@ -47,8 +49,8 @@ public class ImageFragment extends Fragment {
         View view =  inflater.inflate(R.layout.fragment_image_slide_page, container, false);
 
         ImageView img = (ImageView) view.findViewById(R.id.city_image_view);
-        Picasso.with(getContext()).load(mPhoto.getPhotoUrl()).resize(300,300).onlyScaleDown().centerCrop().into(img);
 
+        Picasso.with(getContext()).load(mPhoto.getPhotoUrl()).resize(300,300).onlyScaleDown().centerCrop().into(img);
 
         return view;
     }
