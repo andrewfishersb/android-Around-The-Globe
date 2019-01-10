@@ -4,7 +4,6 @@ package com.fisher.andrew.aroundtheglobe.Fragments;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,7 +11,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.fisher.andrew.aroundtheglobe.Activities.GameActivity;
-import com.fisher.andrew.aroundtheglobe.Adapters.ImagePagerAdapter;
 import com.fisher.andrew.aroundtheglobe.FlickrAsyncTask;
 import com.fisher.andrew.aroundtheglobe.R;
 import com.fisher.andrew.aroundtheglobe.models.City;
@@ -23,22 +21,22 @@ import java.util.List;
 import java.util.Random;
 import java.util.concurrent.ExecutionException;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class GameFragment extends Fragment implements View.OnClickListener{
-    @Bind(R.id.answer_a)
+    @BindView(R.id.answer_a)
     Button mAnswerABtn;
-    @Bind(R.id.answer_b)
+    @BindView(R.id.answer_b)
     Button mAnswerBBtn;
-    @Bind(R.id.answer_c)
+    @BindView(R.id.answer_c)
     Button mAnswerCBtn;
-    @Bind(R.id.answer_d)
+    @BindView(R.id.answer_d)
     Button mAnswerDBtn;
-//    @Bind(R.id.city_view_pager)
+//    @BindView(R.id.city_view_pager)
 //    ViewPager mCityImagePager;
 
     private GameActivity mActivity;
@@ -94,10 +92,10 @@ public class GameFragment extends Fragment implements View.OnClickListener{
 
         Log.d("Check","City Photos " + correctCity.getCityName() + " " + correctCity.getPhotos().size()+"");
 
-//todo commented out to help debug
-                ViewPager imgPager = (ViewPager) v.findViewById(R.id.city_view_pager);
-                ImagePagerAdapter adapter = new ImagePagerAdapter(getFragmentManager(),correctCity.getPhotos());
-        imgPager.setAdapter(adapter);
+
+//                ViewPager imgPager = (ViewPager) v.findViewById(R.id.city_view_pager);
+//                ImagePagerAdapter adapter = new ImagePagerAdapter(getFragmentManager(),correctCity.getPhotos());
+//        imgPager.setAdapter(adapter);
 
 
         return v;

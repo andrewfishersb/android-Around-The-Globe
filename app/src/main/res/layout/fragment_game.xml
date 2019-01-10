@@ -5,10 +5,17 @@
              android:orientation="vertical"
              tools:context="com.fisher.andrew.aroundtheglobe.Fragments.GameFragment">
 
-        <android.support.v4.view.ViewPager
-            android:id="@+id/city_view_pager"
-            android:overScrollMode="never"
+        <!--<android.support.v4.view.ViewPager-->
+            <!--android:id="@+id/city_view_pager"-->
+            <!--android:overScrollMode="never"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="0dp"-->
+            <!--android:layout_weight="1"/>-->
+
+        <android.support.v7.widget.RecyclerView
             android:layout_width="match_parent"
+            android:overScrollMode="never"
+            android:id="@+id/recyclerView"
             android:layout_height="0dp"
             android:layout_weight="1"/>
 

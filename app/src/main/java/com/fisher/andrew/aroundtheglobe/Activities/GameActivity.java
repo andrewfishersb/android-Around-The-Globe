@@ -17,25 +17,25 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class GameActivity extends AppCompatActivity implements View.OnClickListener{
-//    @Bind(R.id.city_image_view)
+//    @BindView(R.id.city_image_view)
 //    ImageView mCityImage;
-//    @Bind(R.id.gamePager)
+//    @BindView(R.id.gamePager)
 //    NonSwipeableViewPager mPager;
-    @Bind(R.id.gameScreen)
+    @BindView(R.id.gameScreen)
     FrameLayout mScreen;
     private List<City> mCities;
     private GameScreenPagerAdapter mAdapter;
     private int mRound;
     private int mTotalRounds;
 
-//    @Bind(R.id.answer_a) Button mAnswerABtn;
-//    @Bind(R.id.answer_b) Button mAnswerBBtn;
-//    @Bind(R.id.answer_c) Button mAnswerCBtn;
-//    @Bind(R.id.answer_d) Button mAnswerDBtn;
+//    @BindView(R.id.answer_a) Button mAnswerABtn;
+//    @BindView(R.id.answer_b) Button mAnswerBBtn;
+//    @BindView(R.id.answer_c) Button mAnswerCBtn;
+//    @BindView(R.id.answer_d) Button mAnswerDBtn;
 //    private List<Button> mBtnAnswerArray;
 //    private String correctAnswer;
 
