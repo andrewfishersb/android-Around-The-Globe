@@ -1,4 +1,4 @@
-package com.fisher.andrew.aroundtheglobe.Adapters;
+package com.fisher.andrew.aroundtheglobe.AdaptersOld;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -18,7 +18,7 @@ import java.util.concurrent.ExecutionException;
 
 public class GameScreenPagerAdapter extends FragmentPagerAdapter{
     private ArrayList<City> mCityAnswers;
-    int rounds = 3;
+    private int rounds = 3;
 
     public GameScreenPagerAdapter(FragmentManager fragmentManager, ArrayList<City> cityAnswers){
         super(fragmentManager);

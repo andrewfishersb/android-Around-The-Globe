@@ -1,4 +1,6 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
 
 android {
     compileSdkVersion 25
@@ -42,9 +44,10 @@ dependencies {
     implementation 'com.android.support:recyclerview-v7:25.4.0'
 
     testImplementation 'junit:junit:4.12'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
 
-
-
-
+}
+repositories {
+    mavenCentral()
 }

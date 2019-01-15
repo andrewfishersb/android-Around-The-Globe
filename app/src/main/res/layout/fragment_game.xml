@@ -15,7 +15,8 @@
         <android.support.v7.widget.RecyclerView
             android:layout_width="match_parent"
             android:overScrollMode="never"
-            android:id="@+id/recyclerView"
+            android:id="@+id/rvPhotoView"
+            android:orientation="horizontal"
             android:layout_height="0dp"
             android:layout_weight="1"/>
 

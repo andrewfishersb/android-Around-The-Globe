@@ -4,6 +4,8 @@ package com.fisher.andrew.aroundtheglobe.Fragments;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,7 +15,9 @@ import android.widget.Button;
 import com.fisher.andrew.aroundtheglobe.Activities.GameActivity;
 import com.fisher.andrew.aroundtheglobe.FlickrAsyncTask;
 import com.fisher.andrew.aroundtheglobe.R;
+import com.fisher.andrew.aroundtheglobe.adapters.ImageViewAdapter;
 import com.fisher.andrew.aroundtheglobe.models.City;
+import com.fisher.andrew.aroundtheglobe.models.Photo;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -36,9 +40,8 @@ public class GameFragment extends Fragment implements View.OnClickListener{
     Button mAnswerCBtn;
     @BindView(R.id.answer_d)
     Button mAnswerDBtn;
-//    @BindView(R.id.city_view_pager)
-//    ViewPager mCityImagePager;
-
+    @BindView(R.id.rvPhotoView)
+    RecyclerView mRvPhotoView;
     private GameActivity mActivity;
     private List<Button> mBtnAnswerArray;
 
@@ -93,9 +96,12 @@ public class GameFragment extends Fragment implements View.OnClickListener{
         Log.d("Check","City Photos " + correctCity.getCityName() + " " + correctCity.getPhotos().size()+"");
 
 
-//                ViewPager imgPager = (ViewPager) v.findViewById(R.id.city_view_pager);
-//                ImagePagerAdapter adapter = new ImagePagerAdapter(getFragmentManager(),correctCity.getPhotos());
-//        imgPager.setAdapter(adapter);
+        List<Photo> cityPhotos = correctCity.getPhotos();
+        ImageViewAdapter adapter = new ImageViewAdapter(cityPhotos,getContext());
+        mRvPhotoView.setAdapter(adapter);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false);
+        mRvPhotoView.setLayoutManager(linearLayoutManager);
+
 
 
         return v;

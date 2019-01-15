@@ -1,10 +1,10 @@
-package com.fisher.andrew.aroundtheglobe.Adapters;
+package com.fisher.andrew.aroundtheglobe.AdaptersOld;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class ImageRecyclerViewAdapter extends RecyclerView.Adapter<ImageRecyclerViewAdapter.ViewHolder>
+public class ImageViewAdapterJ extends RecyclerView.Adapter<ImageViewAdapterJ.ViewHolder>
 {
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -26,6 +26,9 @@ public class ImageRecyclerViewAdapter extends RecyclerView.Adapter<ImageRecycler
 
         public ViewHolder(View view){
             super(view);
+
+
+
         }
 
     }
