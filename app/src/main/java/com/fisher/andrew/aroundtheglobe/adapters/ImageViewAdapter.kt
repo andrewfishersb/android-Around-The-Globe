@@ -13,7 +13,7 @@ import kotlinx.android.synthetic.main.fragment_image_slide_page.view.*
 class ImageViewAdapter(private val photos : List<Photo>, private val context: Context): RecyclerView.Adapter<ImageViewAdapter.ViewHolder>() {
 
     override fun getItemCount(): Int {
-        return photos.size
+        return 10//todo use points to allow more photos
     }
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ViewHolder {

@@ -1,6 +1,7 @@
 package com.fisher.andrew.aroundtheglobe.Fragments;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
@@ -13,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.fisher.andrew.aroundtheglobe.Activities.GameActivity;
+import com.fisher.andrew.aroundtheglobe.Activities.MainActivity;
 import com.fisher.andrew.aroundtheglobe.FlickrAsyncTask;
 import com.fisher.andrew.aroundtheglobe.R;
 import com.fisher.andrew.aroundtheglobe.adapters.ImageViewAdapter;
@@ -107,7 +109,7 @@ public class GameFragment extends Fragment implements View.OnClickListener{
         return v;
     }
 
-    //doesnt check for repeats or if even a repeat of the correct answer
+    //doesn't check for repeats or if even a repeat of the correct answer
     public String[] wrongCityAnswers(){
         String [] optionArray = new String[3];
 
@@ -132,19 +134,22 @@ public class GameFragment extends Fragment implements View.OnClickListener{
 
         if(view == mBtnAnswerArray.get(0)){
             mBtnAnswerArray.get(0).setBackgroundDrawable(ContextCompat.getDrawable(getContext(),R.drawable.answer_btn_correct));
+
+            //User continues if they get it correct
+            mActivity.incrementCurrentRound();
+            int nextRoundIndex = mActivity.getCurrentRound();
+            Log.d("IndexCheck",""+nextRoundIndex);
+            mActivity.goToNextRound(nextRoundIndex);
         }else{
             mBtnAnswerArray.get(0).setBackgroundDrawable(ContextCompat.getDrawable(getContext(),R.drawable.answer_btn_correct));
             view.setBackgroundDrawable(ContextCompat.getDrawable(getContext(),R.drawable.answer_btn_wrong));
+            Intent intent = new Intent(getActivity(),MainActivity.class);//todo eventually go to a stat page
+            startActivity(intent);
+            getActivity().overridePendingTransition(R.anim.start_exit_down, R.anim.end_exit_down);
 
         }
 
-        mActivity.incrementCurrentRound();
-        int nextRoundIndex = mActivity.getCurrentRound();
-        Log.d("IndexCheck",""+nextRoundIndex);
-        mActivity.goToNextRound(nextRoundIndex);
 
-//        int incrementPagerIndex = mActivity.getPager().getCurrentItem() + 1;
-//        mActivity.getPager().setCurrentItem(incrementPagerIndex);
 
     }
 
